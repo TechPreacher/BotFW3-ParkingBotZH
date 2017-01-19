@@ -9,7 +9,7 @@ The bot uses the German LUIS.ai but can easily be edited to use English.
 Log in to Luis.ai and create a Bot by uploading the included **ParkingBot.json** file.
 Train and publish the LUIS.ai model and copy the URL presented to you by LUIS.ai on publishing:
 
-**https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/[luis app id]?subscription-key=[key]&verbose=true**
+    https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/[your_luis_app_id]?subscription-key=[your_key]&verbose=true
 
 Add "&q=" to the end of the URL and copy it to the Luis.cs class.
 
@@ -22,7 +22,7 @@ Copy down the **Micrsooft App ID** and **Microsoft App Password** and copy them 
 
 Deploy the bot project as an Azure Web App and note it's endpoint in the following format:
 
-**https://[yourname].azurewebsites.net/api/messages**
+    https://[yourname].azurewebsites.net/api/messages
 
 Copy this endpoint to the bot framework configuration page's "Messaging Endpoint" field.
 
