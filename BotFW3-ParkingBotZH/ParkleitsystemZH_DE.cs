@@ -134,16 +134,17 @@ namespace BotFW3_ParkingBotZH
 
         public List<Parking> FindTop5Parkings()
         {
-            List<Parking> _parkingListSorted = _parkingList.OrderByDescending(o => o.Available).ToList();
-            List<Parking> _parkingListTop5 = new List<Parking>();
-            for (int _i = 0; _i < 5; _i++ )
+            List<Parking> _parkingListSorted = new List<Parking>();
+            int _count = 0;
+
+            foreach (var _parking in _parkingList.OrderByDescending(o => o.Available, new SemiNumericComparer()))
             {
-                _parkingListTop5.Add(_parkingListSorted[_i]);
+                if (_count < 5)
+                    _parkingListSorted.Add(_parking);
+                _count++;
             }
 
-            return _parkingListTop5;
-
-
+            return _parkingListSorted;
         }
 
         public string ListParking()
@@ -210,6 +211,40 @@ namespace BotFW3_ParkingBotZH
             };
 
             return _thumbCard;
+        }
+    }
+
+    public class SemiNumericComparer : IComparer<string>
+    {
+        public int Compare(string _s1, string _s2)
+        {
+            if (IsNumeric(_s1) && IsNumeric(_s2))
+            {
+                if (Convert.ToInt32(_s1) > Convert.ToInt32(_s2)) return 1;
+                if (Convert.ToInt32(_s1) < Convert.ToInt32(_s2)) return -1;
+                if (Convert.ToInt32(_s1) == Convert.ToInt32(_s2)) return 0;
+            }
+
+            if (IsNumeric(_s1) && !IsNumeric(_s2))
+                return 1;
+
+            if (!IsNumeric(_s1) && IsNumeric(_s2))
+                return -1;
+
+            return string.Compare(_s1, _s2, true);
+        }
+
+        public static bool IsNumeric(object _value)
+        {
+            try
+            {
+                int _i = Convert.ToInt32(_value.ToString());
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
     }
 
