@@ -1,0 +1,427 @@
+{
+  "luis_schema_version": "2.1.0",
+  "versionId": "0.1",
+  "name": "ZurichParkingBotLuisEN",
+  "desc": "Bot that allows you to find parking in Zürich in English",
+  "culture": "en-us",
+  "intents": [
+    {
+      "name": "again"
+    },
+    {
+      "name": "find"
+    },
+    {
+      "name": "hi"
+    },
+    {
+      "name": "list"
+    },
+    {
+      "name": "None"
+    },
+    {
+      "name": "top5"
+    }
+  ],
+  "entities": [],
+  "composites": [],
+  "closedLists": [
+    {
+      "name": "Parking",
+      "subLists": [
+        {
+          "canonicalForm": "Parkgarage am Central",
+          "list": [
+            "central"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Accu",
+          "list": [
+            "accu"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Albisriederplatz",
+          "list": [
+            "albisriederplatz"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Bleicherweg",
+          "list": [
+            "bleicherweg"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Center Eleven",
+          "list": [
+            "center eleven",
+            "eleven"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus City Parking",
+          "list": [
+            "city",
+            "city parking"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Cityport",
+          "list": [
+            "cityport"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Crowne Plaza",
+          "list": [
+            "crowne plaza",
+            "crowne"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Dorflinde",
+          "list": [
+            "dorflinde"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Feldegg",
+          "list": [
+            "feldegg"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Globus",
+          "list": [
+            "globus"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Hardau II",
+          "list": [
+            "hardau",
+            "hardau 2",
+            "hardau ii"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Hauptbahnhof",
+          "list": [
+            "hauptbahnhof",
+            "hb"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Hohe Promenade",
+          "list": [
+            "hohe promenade",
+            "hopro",
+            "promenade"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Jelmoli",
+          "list": [
+            "jelmoli"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Jungholz",
+          "list": [
+            "jungholz"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Max-Bill-Platz",
+          "list": [
+            "max-bill-platz",
+            "max bill platz",
+            "max bill"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Messe Zürich AG",
+          "list": [
+            "messe zürich",
+            "messe züri",
+            "messe zurich",
+            "messe"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Nordhaus",
+          "list": [
+            "nordhaus"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Octavo",
+          "list": [
+            "octavo"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Opéra",
+          "list": [
+            "opera",
+            "opéra"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus P West",
+          "list": [
+            "p west",
+            "west"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Park Hyatt",
+          "list": [
+            "park hyatt",
+            "hyatt"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Parkside",
+          "list": [
+            "parkside"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Pfingstweid",
+          "list": [
+            "pfingstweid"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Stampfenbach",
+          "list": [
+            "stampfenbach"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Talgarten",
+          "list": [
+            "talgarten"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus USZ Nord",
+          "list": [
+            "usz nord",
+            "usz",
+            "nord"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Uni Irchel",
+          "list": [
+            "uni irchel",
+            "irchel",
+            "uni"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Urania",
+          "list": [
+            "urania"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Utoquai",
+          "list": [
+            "utoquai"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Züri 11 Shopping",
+          "list": [
+            "züri 11 shopping",
+            "zuri 11 shopping",
+            "züri 11",
+            "zuri 11"
+          ]
+        },
+        {
+          "canonicalForm": "Parkhaus Zürichhorn",
+          "list": [
+            "zürichhorn",
+            "zurichhorn",
+            "zürihorn"
+          ]
+        },
+        {
+          "canonicalForm": "Parkplatz Bienen",
+          "list": [
+            "bienen"
+          ]
+        },
+        {
+          "canonicalForm": "Parkplatz Eisfeld",
+          "list": [
+            "eisfeld"
+          ]
+        },
+        {
+          "canonicalForm": "Parkplatz Theater 11",
+          "list": [
+            "theater 11",
+            "theater"
+          ]
+        },
+        {
+          "canonicalForm": "Parkplatz USZ Süd",
+          "list": [
+            "usz süd",
+            "usz sud",
+            "usz",
+            "süd"
+          ]
+        }
+      ]
+    }
+  ],
+  "bing_entities": [],
+  "model_features": [],
+  "regex_features": [],
+  "utterances": [
+    {
+      "text": "hello",
+      "intent": "hi",
+      "entities": []
+    },
+    {
+      "text": "hi",
+      "intent": "hi",
+      "entities": []
+    },
+    {
+      "text": "good day",
+      "intent": "hi",
+      "entities": []
+    },
+    {
+      "text": "good morning",
+      "intent": "hi",
+      "entities": []
+    },
+    {
+      "text": "good afternoon",
+      "intent": "hi",
+      "entities": []
+    },
+    {
+      "text": "good evening",
+      "intent": "hi",
+      "entities": []
+    },
+    {
+      "text": "how about now?",
+      "intent": "again",
+      "entities": []
+    },
+    {
+      "text": "please repeat",
+      "intent": "again",
+      "entities": []
+    },
+    {
+      "text": "again",
+      "intent": "again",
+      "entities": []
+    },
+    {
+      "text": "please repeat that",
+      "intent": "again",
+      "entities": []
+    },
+    {
+      "text": "and now?",
+      "intent": "again",
+      "entities": []
+    },
+    {
+      "text": "spaces in promenade?",
+      "intent": "find",
+      "entities": []
+    },
+    {
+      "text": "please show me the parkings in zurich.",
+      "intent": "list",
+      "entities": []
+    },
+    {
+      "text": "where is the most available parking?",
+      "intent": "top5",
+      "entities": []
+    },
+    {
+      "text": "which parkings does zurich have?",
+      "intent": "list",
+      "entities": []
+    },
+    {
+      "text": "parkings in zurich?",
+      "intent": "list",
+      "entities": []
+    },
+    {
+      "text": "which parkings have the most available spaces?",
+      "intent": "top5",
+      "entities": []
+    },
+    {
+      "text": "show me the top 5.",
+      "intent": "top5",
+      "entities": []
+    },
+    {
+      "text": "how many places are available in urania?",
+      "intent": "find",
+      "entities": []
+    },
+    {
+      "text": "show me the available spaces in crowne.",
+      "intent": "find",
+      "entities": []
+    },
+    {
+      "text": "please list the parkings in zurich.",
+      "intent": "list",
+      "entities": []
+    },
+    {
+      "text": "available parking in globus.",
+      "intent": "find",
+      "entities": []
+    },
+    {
+      "text": "free parking in accu",
+      "intent": "find",
+      "entities": []
+    },
+    {
+      "text": "are there spaces available in urania?",
+      "intent": "find",
+      "entities": []
+    },
+    {
+      "text": "how much space is available in jelmoli?",
+      "intent": "find",
+      "entities": []
+    },
+    {
+      "text": "i would like to park in promenade.",
+      "intent": "find",
+      "entities": []
+    },
+    {
+      "text": "show me parkings in zurich.",
+      "intent": "list",
+      "entities": []
+    }
+  ]
+}
