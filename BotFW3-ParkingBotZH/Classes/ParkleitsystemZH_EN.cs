@@ -12,9 +12,17 @@ namespace BotFW3_ParkingBotZH
     class ParkleitsystemZH
     {
         private ParkleitsystemZHData _data;
-        public List<Attachment> Attachments = new List<Attachment>();
 
-        public async Task<string> GetParking(string _name)
+        public List<Attachment> Attachments = new List<Attachment>();
+        public string ResultChat = "I'm sorry, I can't understand you.";
+        public string ResultSpeak = "I'm sorry, I can't understand you.";
+
+        public void SayHi()
+        {
+            ResultChat = ResultSpeak = "Hello! You can ask me for a list of parkings in Zurich and for the number of available parking spaces in a parking.";
+        }
+
+        public void GetParking(string _name)
         {
             if (_data == null)
             {
@@ -22,31 +30,30 @@ namespace BotFW3_ParkingBotZH
                 _data.LoadParking();
             }
 
-            string _result;
-
             Parking _parking = _data.FindParking(_name);
 
-            if (_parking.Name.ToLower() == "unbekannt")
+            if (_parking.Name.ToLower() == "unknown")
             {
-                _result = "Ich kenne dieses Parkhaus leider nicht. Hier ist eine Liste von mir bekannten Parkhäusern in Zürich: \n\n " + _data.ListParking();
+                ResultChat = "I'm sorry but I don't know this parking. Here is a list of parkings that I know of in Zurich: \n\n " + _data.ListParking();
+                ResultSpeak = "I'm sorry but I don't know this parking.";
             }
             else
             {
                 if (_parking.Status.ToLower() != "open")
                 {
-                    _result = _parking.Name + " ist zur Zeit geschlossen.";
+                    ResultChat = ResultSpeak = _parking.Name + " is currently closed.";
                 }
                 else
                 {
-                    _result = "Hier sind Ihre Informationen zu " + _parking.Name;
+                    ResultChat = "Here is the information on " + _parking.Name;
                     this.Attachments.Add(_data.GetHeroCard(_parking).ToAttachment());
+
+                    ResultSpeak = _parking.Name + " is currently " + _parking.Status + " and has " + _parking.Round(_parking.Available) + " available spaces.";
                 }
             }
-
-            return _result;
         }
 
-        public async Task<string> GetTop5Parkings()
+        public void GetTop5Parkings()
         {
             if (_data == null)
             {
@@ -54,19 +61,18 @@ namespace BotFW3_ParkingBotZH
                 _data.LoadParking();
             }
 
-            string _result;
-
             List<Parking> _parkings = _data.FindTop5Parkings();
 
-            _result = "Hier sind die 5 Parkhäuser in Zürich mit den meisten, freien Parkplätzen:";
-
+            ResultChat = "Here are the 5 parkings in Zurich with the most available spaces: ";
             foreach (Parking _p in _parkings)
                 this.Attachments.Add(_data.GetThumbnailCard(_p).ToAttachment());
 
-            return _result;
+            ResultSpeak = "Here are the 5 parkings in Zurich with the most available spaces: ";
+            foreach (Parking _p in _parkings)
+                ResultSpeak += _p.Name + " with " + _p.Round(_p.Available) + " spaces. ";
         }
 
-        public async Task<string> ListParkings()
+        public void ListParkings()
         {
             if (_data == null)
             { 
@@ -74,9 +80,7 @@ namespace BotFW3_ParkingBotZH
                 _data.LoadParking();
             }
 
-            string _result = "Die verfügbaren Parkhäuser in Zürich sind: \n\n" + _data.ListParking();
-
-            return _result;
+            ResultChat = ResultSpeak = "The available parkings in Zurich are: \n\n" + _data.ListParking();
         }
     }
 
@@ -121,7 +125,7 @@ namespace BotFW3_ParkingBotZH
 
         public Parking FindParking(string _name)
         {
-            Parking _pResult = new Parking("http://www.pls-zh.ch", "http://pls-zh.ch/images/maps/stadtzuerich.gif", "Unbekannt", "geschlossen", "0");
+            Parking _pResult = new Parking("http://www.pls-zh.ch", "http://pls-zh.ch/images/maps/stadtzuerich.gif", "unknown", "closed", "0");
 
             foreach (Parking _p in _parkingList)
             {
@@ -147,6 +151,7 @@ namespace BotFW3_ParkingBotZH
             return _parkingListSorted;
         }
 
+
         public string ListParking()
         {
             StringBuilder _list = new StringBuilder();
@@ -171,15 +176,15 @@ namespace BotFW3_ParkingBotZH
             {
                 Value = _p.Url,
                 Type = "openUrl",
-                Title = "Im Browser anzeigen"
+                Title = "Show in browser"
             };
             _cardButtons.Add(_cardAction);
 
             HeroCard _heroCard = new HeroCard()
             {
                 Title = _p.Name,
-                Subtitle = "Das Parkhaus ist: " + _p.Status,
-                Text = "Anzahl freie Parkplätze: " + _p.Available,
+                Subtitle = "The parking is: " + _p.Status,
+                Text = "Number of free spaces: " + _p.Available,
                 Images = _cardImages,
                 Buttons = _cardButtons
             };
@@ -197,15 +202,15 @@ namespace BotFW3_ParkingBotZH
             {
                 Value = _p.Url,
                 Type = "openUrl",
-                Title = "Im Browser anzeigen"
+                Title = "Show in browser"
             };
             _cardButtons.Add(_cardAction);
 
             ThumbnailCard _thumbCard = new ThumbnailCard()
             {
                 Title = _p.Name,
-                Subtitle = "Das Parkhaus ist: " + _p.Status,
-                Text = "Anzahl freie Parkplätze: " + _p.Available,
+                Subtitle = "The parking is: " + _p.Status,
+                Text = "Number of free spaces: " + _p.Available,
                 Images = _cardImages,
                 Buttons = _cardButtons
             };
@@ -259,6 +264,43 @@ namespace BotFW3_ParkingBotZH
         public Parking(string _url, string _image, string _name, string _status, string _available)
         {
             Url = _url; Image = _image;  Name = _name; Status = _status; Available = _available;
+        }
+
+        public string Round(string _number)
+        {
+            string _result = "";
+            int _num = 0;
+
+            try { 
+                _num = Convert.ToInt32(_number);
+            }
+            catch
+            {
+                //do nothing;
+            }
+
+            if (_num <= 10)
+                _result = _num.ToString();
+
+            if (10 < _num && _num <= 25)
+                _result = "about 20";
+
+            if (25 < _num && _num <= 50)
+                _result = "about 50";
+
+            if (50 < _num && _num <= 100)
+                _result = "about 100";
+
+            if (100 < _num && _num <= 200)
+                _result = "about 200";
+
+            if (200 < _num && _num <= 500)
+                _result = "almost 500";
+
+            if (500 < _num)
+                _result = "more than 500";
+
+            return _result;
         }
     }
 

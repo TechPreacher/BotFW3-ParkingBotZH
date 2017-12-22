@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -14,8 +16,7 @@ namespace BotFW3_ParkingBotZH
 
             using (var client = new HttpClient())
             {
-                string uri = "https://api.projectoxford.ai/luis/v2.0/apps/[appid]?subscription-key=[key]&verbose=true&q=" 
-                    + strEscaped;
+                string uri = ConfigurationManager.AppSettings["LuisModelUri"] + strEscaped;
 
                 HttpResponseMessage msg = await client.GetAsync(uri);
 
@@ -33,29 +34,37 @@ namespace BotFW3_ParkingBotZH
     public class Luis
     {
         public string query { get; set; }
-        public lTopScoringIntent topScoringIntent { get; set; }
-        public lIntent[] intents { get; set; }
-        public lEntity[] entities { get; set; }
+        public TopScoringIntent topScoringIntent { get; set; }
+        public List<Intent> intents { get; set; }
+        public List<Entity> entities { get; set; }
     }
 
-    public class lTopScoringIntent
-    {
-            public string intent { get; set; }
-            public float score { get; set; }
-    }
-
-    public class lIntent
+    public class TopScoringIntent
     {
         public string intent { get; set; }
-        public float score { get; set; }
+        public double score { get; set; }
     }
 
-    public class lEntity
+    public class Intent
+    {
+        public string intent { get; set; }
+        public double score { get; set; }
+    }
+
+    public class Entity
     {
         public string entity { get; set; }
         public string type { get; set; }
         public int startIndex { get; set; }
         public int endIndex { get; set; }
+        public Resolution resolution { get; set; }
         public float score { get; set; }
+
     }
+
+    public class Resolution
+    {
+        public List<string> values { get; set; }
+    }
+
 }
